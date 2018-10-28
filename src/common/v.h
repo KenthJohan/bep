@@ -101,3 +101,19 @@ int v2f64_in_triangle
 	double t = (p0->x * p1->y - p0->y * p1->x + (p0->y - p1->y) * p->x + (p1->x - p0->x) * p->y) * sign;
 	return (s > 0.0) && (t > 0.0) && (s + t) < (2.0 * A * sign);
 }
+
+
+
+
+uint32_t u32_random (uint32_t x0, uint32_t x1)
+{
+    uint32_t r = (x1 - x0) + 1;
+    uint32_t y = x0 + (rand() % r);
+    return y;
+}
+
+
+uint32_t u32_random_mod (uint32_t x)
+{
+	return rand () % x;
+}

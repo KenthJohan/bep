@@ -46,7 +46,7 @@ void shortest
 )
 {
 	typedef long unsigned lu;
-	//printf ("FIND NEXT FROM %lu\n", (lu)o);
+	//TRACE_F ("FIND NEXT FROM %lu\n", (lu)o);
 	double lmin = DBL_MAX;
 	uint32_t imin = UINT32_MAX;
 	double d [2];
@@ -59,7 +59,7 @@ void shortest
 		double * b = p [i].v;
 		vf64_sub (2, d, a, b);
 		double l = vf64_dot (2, d, d);
-		printf ("%10lu %4lu %4lu %7.3f\n", t [i], o, i, l);
+		//TRACE_F ("%10lu %4lu %4lu %7.3f\n", t [i], o, i, l);
 		if (l < lmin)
 		{
 			lmin = l;

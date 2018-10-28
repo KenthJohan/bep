@@ -1,18 +1,18 @@
-project Skopy is
+project Genetic is
 
 	for Languages use ("C");
 	for Object_Dir use "obj";
 	for Exec_Dir use "bin";
 	for Source_Dirs use 
 	(
-		"src"
+		"src/common",
+		"src/genetic"
 	);
 	
 	
 	Main_Files := 
 	(
-		--"demo.c",
-		"bruteforce.c"
+		"genetic.c"
 	);
 	
 	for Main use Main_Files;
@@ -73,6 +73,6 @@ project Skopy is
 
 	end Linker;
 
-end Skopy;
+end Genetic;
 
 

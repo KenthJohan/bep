@@ -1,4 +1,4 @@
-project Bep is
+project Triangle is
 
 	for Languages use ("C++");
 	for Object_Dir use "obj";
@@ -6,15 +6,15 @@ project Bep is
 	for Source_Dirs use 
 	(
 		"C:/include",
-		"src"
+		"src/common",
+		"src/triangle"
 	);
 	
 	
 	Main_Files := 
 	(
-		--"test.cpp",
+		"test.cpp",
 		"test2.cpp"
-		--"test3.cpp"
 	);
 	
 	for Main use Main_Files;
@@ -26,23 +26,24 @@ project Bep is
 	end Builder;
 
 	package Compiler is
-		Flags := 
-		(
-			"-std=c++11"
-		);
-		for Default_Switches ("C++") use Flags;
+		for Default_Switches ("C++") use ("-std=c++11", "-static");
 	end Compiler;
 
 	package Linker is
-		Flags_CV := 
+		CV := 
 		(
 			"-LC:/lib",
-			"-lopencv_imgproc343",
 			"-lopencv_highgui343",
-			"-lopencv_core343"
+			"-lopencv_imgcodecs343",
+			"-lopencv_imgproc343",
+			"-lopencv_core343",
+			"-lgdi32",
+			"-lcomdlg32",
+			"-lzlib",
+			"-lstdc++"
 		);
-		for Switches ("C++") use Flags_CV;
+		for Switches ("C++") use CV;
 	end Linker;
 
-end Bep;
+end Triangle;
 

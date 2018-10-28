@@ -1,0 +1,49 @@
+project Star is
+
+	for Languages use ("C++");
+	for Object_Dir use "obj";
+	for Exec_Dir use "bin";
+	for Source_Dirs use 
+	(
+		"C:/include",
+		"src/common",
+		"src/star"
+	);
+	
+	
+	Main_Files := 
+	(
+		"star.cpp"
+	);
+	
+	for Main use Main_Files;
+	
+	for Source_Files use Main_Files &
+	();
+	
+	package Builder is 
+	end Builder;
+
+	package Compiler is
+		for Default_Switches ("C++") use ("-std=c++11", "-static", "-static-libgcc", "-static-libstdc++", "-optl-static");
+		--for Default_Switches ("C++") use ("-std=c++11");
+	end Compiler;
+
+	package Linker is
+		CV := 
+		(
+			"-LC:/lib",
+			"-lopencv_highgui343",
+			"-lopencv_imgcodecs343",
+			"-lopencv_imgproc343",
+			"-lopencv_core343",
+			"-lgdi32",
+			"-lcomdlg32",
+			"-lzlib",
+			"-lstdc++"
+		);
+		for Switches ("C++") use CV;
+	end Linker;
+
+end Star;
+
