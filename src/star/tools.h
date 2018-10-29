@@ -76,12 +76,18 @@ void draw_v2f64_star
 		cv::Point cvb = cv::Point (p [i].x, p [i].y);
 		cv::line (image, cva, cvb, color);
 		
+		//If entangled
+		if (abs (w [i]) > 180.0)
+		{
+			cv::circle (image, cvb, 10, cv::Scalar (0,200,0), 3);
+		}
+		
 		char buf [100];
 		//double d [2];
 		//vf64_sub (2, d, o->v, p [i].v);
 		//snprintf (buf, 100, "%lf", atan2 (d [1], d [0]) * (180/CV_PI));
 		snprintf (buf, 100, "%i", (int)w [i]);
-		cv::putText (image, buf, cvb + cv::Point (50, 0), CV_FONT_HERSHEY_SIMPLEX, 1, color);
+		cv::putText (image, buf, cvb + cv::Point (50, 0), CV_FONT_HERSHEY_SIMPLEX, 0.7, cv::Scalar (200,200,0));
 	}
 }
 

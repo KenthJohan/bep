@@ -56,6 +56,9 @@ double vf64_angle (uint32_t n, double a [], double b [])
 	double aa = sqrt (vf64_dot (n, a, a));
 	double bb = sqrt (vf64_dot (n, b, b));
 	double f = ab/(aa*bb);
+	//Floating point precision error can cause the value outside (-1..1) 
+	//which causes (acos) to output (NaN) or (infinity).
+	//Crop (f) to (-1..1) to avoid problem.
 	f = MIN (f, 1.0);
 	f = MAX (f, -1.0);
 	r = acos (f);
