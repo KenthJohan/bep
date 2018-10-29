@@ -1,6 +1,33 @@
 # Skopy
 
 
+### demo_single
+Input file at argument 1
+
+
+### demo_all
+Reads all files at data/barktree***
+and evaluates answer.
+
+### tri_random
+Randomizes scenario for a park.
+Uses point in triangle test to shorten the leash.
+TODO: Take multiple trees inside the triangle into consideration.
+
+### tri_fromfile
+Input file at argument 1
+Uses point in triangle test to shorten the leash.
+TODO: Take multiple trees inside the triangle into consideration.
+
+### star
+Work in progress.
+Randomizes scenario for a park.
+Skopy and every tree has a connection (star topology).
+Every tree can count number of windings it got from the leash.
+TODO: Using the information from the windings to create a track around the trees.
+
+
+
 ```
 gcc -std=gnu11 src/triangle/demo_single.c -Isrc/common
 gcc -std=gnu11 src/triangle/demo_all.c -Isrc/common
