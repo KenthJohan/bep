@@ -49,6 +49,29 @@ double vf64_dot (uint32_t n, double a [], double b [])
 }
 
 
+double vf64_angle (uint32_t n, double a [], double b [])
+{
+	double r;
+	double ab = vf64_dot (n, a, b);
+	double aa = sqrt (vf64_dot (n, a, a));
+	double bb = sqrt (vf64_dot (n, b, b));
+	double f = ab/(aa*bb);
+	f = MIN (f, 1.0);
+	f = MAX (f, -1.0);
+	r = acos (f);
+	//TRACE_F ("%8.2lf %8.2lf %8.2lf %8.2lf %8.2lf", ab, aa, bb, ab/(aa*bb), r);
+	return r;
+}
+
+
+double v2f64_angle2 (double a [2], double b [2])
+{
+	double a1 = atan2 (a [1], a [0]);
+	double a2 = atan2 (b [1], b [0]);
+	return a1 - a2;
+}
+
+
 void vf64_sub (uint32_t n, double r [], double a [], double b [])
 {
 	for (uint32_t i = 0; i < n; ++ i)
@@ -59,6 +82,15 @@ void vf64_sub (uint32_t n, double r [], double a [], double b [])
 
 
 void vu32_set1 (uint32_t n, uint32_t r [], uint32_t a)
+{
+	for (uint32_t i = 0; i < n; ++ i)
+	{
+		r [i] = a;
+	}
+}
+
+
+void vf64_set1 (uint32_t n, double r [], double a)
 {
 	for (uint32_t i = 0; i < n; ++ i)
 	{

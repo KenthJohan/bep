@@ -1,0 +1,43 @@
+project Triangle_Linux is
+
+	for Languages use ("C++");
+	for Object_Dir use "obj";
+	for Exec_Dir use "bin";
+	for Source_Dirs use 
+	(
+		"src/common",
+		"src/triangle"
+	);
+	
+	
+	Main_Files := 
+	(
+		"test.cpp",
+		"test2.cpp"
+	);
+	
+	for Main use Main_Files;
+	
+	for Source_Files use Main_Files &
+	();
+	
+	package Builder is 
+	end Builder;
+
+	package Compiler is
+		for Default_Switches ("C++") use ("-std=c++11");
+	end Compiler;
+
+	package Linker is
+		CV := 
+		(
+			"-lopencv_highgui",
+			"-lopencv_imgcodecs",
+			"-lopencv_imgproc",
+			"-lopencv_core"
+		);
+		for Switches ("C++") use CV;
+	end Linker;
+
+end Triangle_Linux;
+

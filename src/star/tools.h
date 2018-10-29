@@ -65,6 +65,7 @@ void draw_v2f64_star
 	struct v2f64 o [1],
 	uint32_t n, 
 	struct v2f64 p [],
+	double w [],
 	cv::Scalar color
 )
 {
@@ -76,9 +77,10 @@ void draw_v2f64_star
 		cv::line (image, cva, cvb, color);
 		
 		char buf [100];
-		double d [2];
-		vf64_sub (2, d, o->v, p [i].v);
-		snprintf (buf, 100, "%lf", atan2 (d [1], d [0]) * (180/CV_PI));
+		//double d [2];
+		//vf64_sub (2, d, o->v, p [i].v);
+		//snprintf (buf, 100, "%lf", atan2 (d [1], d [0]) * (180/CV_PI));
+		snprintf (buf, 100, "%i", (int)w [i]);
 		cv::putText (image, buf, cvb + cv::Point (50, 0), CV_FONT_HERSHEY_SIMPLEX, 1, color);
 	}
 }

@@ -1,4 +1,4 @@
-project Star is
+project Triangle_Win is
 
 	for Languages use ("C++");
 	for Object_Dir use "obj";
@@ -7,13 +7,14 @@ project Star is
 	(
 		"C:/include",
 		"src/common",
-		"src/star"
+		"src/triangle"
 	);
 	
 	
 	Main_Files := 
 	(
-		"star.cpp"
+		"test.cpp",
+		"test2.cpp"
 	);
 	
 	for Main use Main_Files;
@@ -25,8 +26,7 @@ project Star is
 	end Builder;
 
 	package Compiler is
-		for Default_Switches ("C++") use ("-std=c++11", "-static", "-static-libgcc", "-static-libstdc++", "-optl-static");
-		--for Default_Switches ("C++") use ("-std=c++11");
+		for Default_Switches ("C++") use ("-std=c++11", "-static");
 	end Compiler;
 
 	package Linker is
@@ -45,5 +45,5 @@ project Star is
 		for Switches ("C++") use CV;
 	end Linker;
 
-end Star;
+end Triangle_Win;
 
