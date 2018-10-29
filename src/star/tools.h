@@ -96,6 +96,7 @@ void get_flags (uint32_t * flags)
 {
 	(*flags) &= ~NEXTACTION;
 	int c = cv::waitKey (3);
+	//TRACE_F ("%lu", c);
 	if (c == 'q' || c == 'Q' || (c & 255) == ESCAPE) 
 	{
 		(*flags) |= QUIT;

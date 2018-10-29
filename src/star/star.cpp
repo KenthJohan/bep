@@ -37,7 +37,12 @@ int main (int argc, char** argv)
 	draw_v2f64 (image, park.ntoy, park.toys, cv::Scalar (200, 40, 255));
 	draw_v2f64 (image, park.ntree, park.trees, cv::Scalar (20, 200, 20));
 	draw_v2f64_track (image, park.ntoy, park.toys, park.track, cv::Scalar (200, 40, 255));
-	cv::imshow ("test", image);
+	{
+		char buf [100];
+		snprintf (buf, 100, "spacebar: next step");
+		cv::putText (image, buf, cv::Point (100, 100), CV_FONT_HERSHEY_SIMPLEX, 2, cv::Scalar (0,0,0));
+	}
+	cv::imshow ("test1", image);
 
 
 
@@ -71,7 +76,7 @@ int main (int argc, char** argv)
 			draw_v2f64 (image, park.ntoy, park.toys, cv::Scalar (200, 40, 255));
 			draw_v2f64 (image, park.ntree, park.trees, cv::Scalar (20, 200, 20));
 			draw_v2f64_track (image, park.ntoy, park.toys, park.track, cv::Scalar (200, 40, 255));
-			cv::imshow ("test", image);
+			cv::imshow ("test1", image);
 		}
 		
 	}

@@ -28,7 +28,7 @@ void track_print (uint32_t n, uint32_t x [])
 }
 
 
-void shortest 
+void skopy_goto_newtoy 
 (
 	uint32_t n, 
 	
@@ -77,7 +77,7 @@ void shortest
 
 
 //Simplifes the track and avoids trees
-int simplify_trivial 
+int skopy_triangle_simplify0 
 (
 	uint32_t n, 
 	
@@ -148,7 +148,7 @@ int simplify_trivial
 }
 
 
-int simplify1 
+int skopy_triangle_simplify1 
 (
 	uint32_t n, 
 	

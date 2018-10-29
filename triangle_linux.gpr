@@ -12,8 +12,8 @@ project Triangle_Linux is
 	
 	Main_Files := 
 	(
-		"test.cpp",
-		"test2.cpp"
+		"tri_random.cpp",
+		"tri_fromfile.cpp"
 	);
 	
 	for Main use Main_Files;

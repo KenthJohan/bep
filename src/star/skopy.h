@@ -21,19 +21,20 @@ void skopy_goto_newtoy
 )
 {
 	typedef long unsigned lu;
-	//TRACE_F ("FIND NEXT FROM %lu\n", (lu)o);
+	//TRACE_F ("FIND NEXT FROM %lu", (lu)o);
 	double lmin = DBL_MAX;
 	uint32_t imin = UINT32_MAX;
 	double d [2];
 	for (uint32_t i = 0; i < n; ++ i)
 	{
+		//TRACE_F ("FIND NEXT FROM %lu", t [i]);
 		if (o == i) {continue;}
 		if (t [i] != UINT32_MAX) {continue;}
 		double * a = p [o].v;
 		double * b = p [i].v;
 		vf64_sub (2, d, a, b);
 		double l = vf64_dot (2, d, d);
-		//TRACE_F ("%10lu %4lu %4lu %7.3f\n", t [i], o, i, l);
+		//TRACE_F ("%10lu %4lu %4lu %7.3f", t [i], o, i, l);
 		if (l < lmin)
 		{
 			lmin = l;
@@ -63,8 +64,7 @@ void skopy_entagle
 	struct v2f64 u [],
 	
 	//Windings.
-	//Some elements of this can build up 
-	//if (o) spins around some (p) coordinates
+	//Element (i) of this can build up if (o) spins around (p [i]).
 	double w []
 )
 {
@@ -139,7 +139,7 @@ void skopypark_init (struct skopypark * park)
 	park->windings = (double *) malloc (sizeof (double) * park->ntoy);
 	vu32_set1 (park->ntoy, park->track, UINT32_MAX);
 	vf64_set1 (park->ntoy, park->windings, 0.0);
-	vf64_set1 (park->ntoy * 2, (double *)park->treed, 0.0);
+	vf64_set1 (park->ntree * 2, (double *)park->treed, 0.0);
 	
 	//Create random scenario
 	struct v2f64 p1 [1] = {1920, 1080};

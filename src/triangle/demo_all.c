@@ -19,7 +19,7 @@ double test (char const * filename)
 	idog = 0;
 	while (1)
 	{
-		shortest (park.n, park.p, park.t, park.c, idog);
+		skopy_goto_newtoy (park.n, park.p, park.t, park.c, idog);
 		if (park.t [idog] == UINT32_MAX) {break;}
 		idog = park.t [idog];
 	}
@@ -27,7 +27,7 @@ double test (char const * filename)
 	idog = 0;
 	while (1)
 	{
-		int r = simplify_trivial (park.n, park.p, park.t, park.c, &idog);
+		int r = skopy_triangle_simplify0 (park.n, park.p, park.t, park.c, &idog);
 		//printf ("idog %lu\n", (lu)idog);
 		if (r) {break;}
 	}
@@ -35,7 +35,7 @@ double test (char const * filename)
 	idog = 0;
 	while (1)
 	{
-		int r = simplify1 (park.n, park.p, park.t, park.c, &idog);
+		int r = skopy_triangle_simplify1 (park.n, park.p, park.t, park.c, &idog);
 		//printf ("idog %lu\n", (lu)idog);
 		if (r) {break;}
 	}

@@ -19,7 +19,7 @@ double test (char const * filename)
 	idog = 0;
 	while (1)
 	{
-		shortest (park.n, park.p, park.t, park.c, idog);
+		skopy_goto_newtoy (park.n, park.p, park.t, park.c, idog);
 		if (park.t [idog] == UINT32_MAX) {break;}
 		idog = park.t [idog];
 	}
@@ -27,7 +27,7 @@ double test (char const * filename)
 	idog = 0;
 	while (1)
 	{
-		int r = simplify_trivial (park.n, park.p, park.t, park.c, &idog);
+		int r = skopy_triangle_simplify0 (park.n, park.p, park.t, park.c, &idog);
 		//printf ("idog %lu\n", (lu)idog);
 		if (r) {break;}
 	}
@@ -35,7 +35,7 @@ double test (char const * filename)
 	idog = 0;
 	while (1)
 	{
-		int r = simplify1 (park.n, park.p, park.t, park.c, &idog);
+		int r = skopy_triangle_simplify1 (park.n, park.p, park.t, park.c, &idog);
 		//printf ("idog %lu\n", (lu)idog);
 		if (r) {break;}
 	}
@@ -51,29 +51,16 @@ double test (char const * filename)
 }
 
 
-double readans (char const * filename)
-{
-	FILE * f = fopen (filename, "r");
-	ASSERT (f != NULL);
-	double l = 0;
-	fscanf (f, "%lf", &l);
-	fclose (f);
-	return l;
-}
 
 
 int main (int argc, char** argv)
 {
-	for (uint32_t i = 0; i < 100; ++ i)
-	{
-		char buf [100];
-		snprintf (buf, 100, "data/barktree.%02u.in", (unsigned) i);
-		//TRACE_F ("%s", buf);
-		double l1 = test (buf);
-		snprintf (buf, 100, "data/barktree.%02u.ans", (unsigned) i);
-		double l2 = readans (buf);
-		printf ("%20s %20.10lf %20.10lf\n", buf, l1, l2);
-	}
+	setbuf (stdout, NULL);
+	setbuf (stderr, NULL);
+	ASSERT_F (argc == 2, "Need exactly one argument that is the filename of the input");
+	
+	double l = test (argv [1]);
+	printf ("%lf\n", l);
 	
 
 	return 0;

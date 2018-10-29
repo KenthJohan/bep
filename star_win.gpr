@@ -25,8 +25,9 @@ project Star_Win is
 	end Builder;
 
 	package Compiler is
-		for Default_Switches ("C++") use ("-std=c++11", "-static", "-static-libgcc", "-static-libstdc++", "-optl-static");
+		--for Default_Switches ("C++") use ("-std=c++11", "-static", "-static-libgcc", "-static-libstdc++", "-optl-static");
 		--for Default_Switches ("C++") use ("-std=c++11");
+		for Default_Switches ("C++") use ("-std=c++11", "-static");
 	end Compiler;
 
 	package Linker is

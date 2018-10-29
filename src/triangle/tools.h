@@ -33,7 +33,7 @@
 
 
 
-void paint_points (cv::Mat & image, uint32_t n, struct v2f64 p [], cv::Scalar c)
+void draw_points (cv::Mat & image, uint32_t n, struct v2f64 p [], cv::Scalar c)
 {
 	for (uint32_t i = 0; i < n; ++ i)
 	{
@@ -54,6 +54,7 @@ cv::Scalar class_color (uint32_t c)
 		case DOG:
 		return cv::Scalar (0, 100, 150);
 	};
+	return cv::Scalar (0, 0, 0);
 }
 
 /*
@@ -74,7 +75,7 @@ void translate (cv::Point &a)
 }
 */
 
-void paint_points_index 
+void draw_points_index 
 (
 	cv::Mat & image, 
 	uint32_t n, 
@@ -93,7 +94,7 @@ void paint_points_index
 }
 
 
-void paint_tracks 
+void draw_tracks 
 (
 	cv::Mat & image, 
 	uint32_t n, 
@@ -190,8 +191,8 @@ void move
 {
 	for (uint32_t i = 0; i < n; ++ i)
 	{
-		des [i].x = (t [0] + src [i].x) * pow (2, t [2]);
-		des [i].y = (t [1] + src [i].y) * pow (2, t [3]);
+		des [i].x = (t [0] + src [i].x) * exp (t [2]);
+		des [i].y = (t [1] + src [i].y) * exp (t [3]);
 	}
 }
 
