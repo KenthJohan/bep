@@ -31,32 +31,76 @@
 
 
 
-void draw_v2f64 
+
+
+void draw_points (cv::Mat & image, uint32_t n, struct v2f64 p [], cv::Scalar c)
+{
+	for (uint32_t i = 0; i < n; ++ i)
+	{
+		cv::Point a (p [i].x, p [i].y);
+		cv::circle (image, a, 5, c, -1);
+	}
+}
+
+
+cv::Scalar class_color (uint32_t c)
+{
+	switch (c)
+	{
+		case TOY:
+		return cv::Scalar (255, 100, 200);
+		case TREE:
+		return cv::Scalar (50, 200, 50);
+		case DOG:
+		return cv::Scalar (0, 100, 150);
+	};
+	return cv::Scalar (0, 0, 0);
+}
+
+/*
+void show (char const * name, cv::Mat const & image)
+{
+	cv::Mat dst;
+	//cv::resize (image, dst, cv::Size (1920, 1080));
+	cv::imshow (name, dst);
+}
+*/
+/*
+void translate (cv::Point &a)
+{
+	a.x += 200;
+	a.y += 100;
+	a.x *= 4;
+	a.y *= 4;
+}
+*/
+
+void draw_points_index 
 (
 	cv::Mat & image, 
 	uint32_t n, 
 	struct v2f64 p [], 
-	cv::Scalar color
+	uint32_t c []
 )
 {
 	char buf [100];
 	for (uint32_t i = 0; i < n; ++ i)
 	{
 		cv::Point a (p [i].x, p [i].y);
+		cv::circle (image, a, 2, class_color (c [i]), -1);
 		snprintf (buf, 100, "%lu", (long unsigned)i);
-		cv::circle (image, a, 2, color, -1);
-		cv::putText (image, buf, a, CV_FONT_HERSHEY_SIMPLEX, 1, color);
+		cv::putText (image, buf, a, CV_FONT_HERSHEY_SIMPLEX, 1, class_color (c [i]));
 	}
 }
 
 
-void draw_v2f64_track
+void draw_tracks 
 (
 	cv::Mat & image, 
 	uint32_t n, 
 	struct v2f64 p [], 
 	uint32_t t [], 
-	cv::Scalar color
+	cv::Scalar c
 )
 {
 	for (uint32_t i = 0; i < n; ++ i)
@@ -66,40 +110,7 @@ void draw_v2f64_track
 		struct v2f64 * b = p + t [i];
 		cv::Point cva = cv::Point (a->x, a->y);
 		cv::Point cvb = cv::Point (b->x, b->y);
-		cv::line (image, cva, cvb, color);
-	}
-}
-
-
-void draw_v2f64_star
-(
-	cv::Mat & image, 
-	struct v2f64 o [1],
-	uint32_t n, 
-	struct v2f64 p [],
-	double w [],
-	cv::Scalar color
-)
-{
-	
-	for (uint32_t i = 0; i < n; ++ i)
-	{
-		cv::Point cva = cv::Point (o->x, o->y);
-		cv::Point cvb = cv::Point (p [i].x, p [i].y);
-		cv::line (image, cva, cvb, color);
-		
-		//If entangled
-		if (abs (w [i]) > 180.0)
-		{
-			cv::circle (image, cvb, 10, cv::Scalar (0,200,0), 3);
-		}
-		
-		char buf [100];
-		//double d [2];
-		//vf64_sub (2, d, o->v, p [i].v);
-		//snprintf (buf, 100, "%lf", atan2 (d [1], d [0]) * (180/CV_PI));
-		snprintf (buf, 100, "%i", (int)w [i]);
-		cv::putText (image, buf, cvb + cv::Point (50, 0), CV_FONT_HERSHEY_SIMPLEX, 0.7, cv::Scalar (200,200,0));
+		cv::line (image, cva, cvb, c);
 	}
 }
 
@@ -184,3 +195,9 @@ void move
 		des [i].y = (t [1] + src [i].y) * exp (t [3]);
 	}
 }
+
+
+
+
+
+

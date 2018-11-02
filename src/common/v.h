@@ -152,3 +152,23 @@ uint32_t u32_random_mod (uint32_t x)
 {
 	return rand () % x;
 }
+
+
+
+
+double v2f64_point_line_distance (double a [2], double b [2], double c [2])
+{
+	double t = 
+	(c [1] - b [1]) * a [0] -
+	(c [0] - b [0]) * a [1] +
+	c [0] * b [1] - c [1] * b [0];
+	
+	double d [2];
+	vf64_sub (2, d, c, b);
+	double l = sqrt (vf64_dot (2, d, d));
+	
+	return fabs (t) / l;
+}
+
+
+

@@ -125,7 +125,61 @@ struct skopypark
 	
 	//Leash windings around the tree.
 	double * windings;
+	
+	//Transform coordinates
+	struct v2f64 * toyt;
+	struct v2f64 * treet;
 };
+
+
+void skopypark_from_file 
+(
+	struct skopypark * park,
+	FILE * f
+)
+{
+	typedef long unsigned lu;
+	uint32_t ntree;
+	uint32_t ntoy;
+	fscanf (f, "%lu%lu", (lu*)&park->ntoy, (lu*)&park->ntree);
+	TRACE_F ("%lu %lu", (lu)park->ntoy, (lu)park->ntree);
+	park->ntoy ++;
+	park->toys = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntoy);
+	park->toyt = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntoy);
+	park->trees = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntree);
+	park->treet = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntree);
+	park->treed = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntree);
+	park->track = (uint32_t *) malloc (sizeof (uint32_t) * park->ntoy);
+	park->windings = (double *) malloc (sizeof (double) * park->ntoy);
+	vu32_set1 (park->ntoy, park->track, UINT32_MAX);
+	vf64_set1 (park->ntoy, park->windings, 0.0);
+	vf64_set1 (park->ntree * 2, (double *)park->treed, 0.0);
+	park->toys [0].x = 0;
+	park->toys [0].y = 0;
+	for (uint32_t i = 1; i < park->ntoy; ++ i)
+	{
+		int r = fscanf (f, "%lf%lf", &park->toys [i].x, &park->toys [i].y);
+		ASSERT (r != EOF);
+	}
+	for (uint32_t i = 0; i < park->ntree; ++ i)
+	{
+		int r = fscanf (f, "%lf%lf", &park->trees [i].x, &park->trees [i].y);
+		ASSERT (r != EOF);
+	}
+}
+
+
+void skopypark_from_filename 
+(
+	struct skopypark * park,
+	char const * filename
+)
+{
+	FILE * f = fopen (filename, "r");
+	ASSERT (f != NULL);
+	skopypark_from_file (park, f);
+	fclose (f);
+}
 
 
 void skopypark_init (struct skopypark * park)
@@ -133,7 +187,9 @@ void skopypark_init (struct skopypark * park)
 	park->ntree = 20;
 	park->ntoy = 40;
 	park->toys = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntoy);
+	park->toyt = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntoy);
 	park->trees = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntree);
+	park->treet = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntree);
 	park->treed = (struct v2f64 *) malloc (sizeof (struct v2f64) * park->ntree);
 	park->track = (uint32_t *) malloc (sizeof (uint32_t) * park->ntoy);
 	park->windings = (double *) malloc (sizeof (double) * park->ntoy);
